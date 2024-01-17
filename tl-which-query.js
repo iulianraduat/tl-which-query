@@ -227,6 +227,14 @@ function byRole(element, variant, root, withIndex) {
     return `${variant}Role('${role}'${roleName})[${index}]`;
   }
 
+  if (role === 'row') {
+    const index = getRoleIndex(root, role, undefined, element);
+    if (index >= 0) {
+      const newVariant = variant.indexOf('All') > 0 ? variant : variant.replace('By', 'AllBy');
+      return `${newVariant}Role('${role}')[${index}]`;
+    }
+  }
+
   if (isRoleUnique(root, role, name)) {
     return `${variant}Role('${role}'${roleName})`;
   }
@@ -688,7 +696,7 @@ function getRoleIndex(root, role, name, element) {
   let node;
   let index = -1;
   while ((node = walker.nextNode())) {
-    if (getElementRole(node) === role && node.textContent === name) {
+    if (getElementRole(node) === role && (!name || node.textContent === name)) {
       index++;
     }
     if (node === element) {
