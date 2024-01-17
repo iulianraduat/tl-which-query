@@ -674,6 +674,7 @@ function getImplicitAriaRolesTd(element) {
 
   const roleTable = table.getAttribute("role");
   switch (roleTable) {
+    case null:
     case "table":
       return "cell";
     case "grid":
