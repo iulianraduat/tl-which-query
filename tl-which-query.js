@@ -215,8 +215,9 @@ function byRole(element, variant, root, withIndex) {
     return;
   }
 
-  const name = element.textContent;
-  const roleName = name ? `, {name: '${name}'}` : "";
+  const name = element.ariaLabel ?? element.textContent;
+  let roleName = name ? `, {name: '${name}'}` : "";
+  roleName = (role === "heading") ? roleName.replace('}', `, level: ${getHeadingLevel(element.tagName)}}`) : '';
 
   if (withIndex) {
     const index = getRoleIndex(root, role, name, element);
@@ -854,4 +855,17 @@ function getWithinEncapsulation(within, middleSelectors) {
     encapsulation = `within( ${encapsulation}\n.${selector} )`;
   });
   return encapsulation;
+}
+
+const reHeading = /^h([1-6])$/i;
+/**
+ * It extracts the heading level from a heading tag
+ * @param tagName is the heading tage 
+ * @returns the level or undefined
+ */
+function getHeadingLevel(tagName) {
+  const matches = tagName.match(reHeading);
+  if (matches) {
+    return matches[1];
+  }
 }

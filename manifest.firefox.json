@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "TL Which Query",
-  "version": "1.3",
+  "version": "1.4",
   "description": "Testing library: which query to use",
   "icons": {
     "32": "icons/octopus-32x32.png",
@@ -9,32 +9,22 @@
     "128": "icons/octopus-128x128.png"
   },
   "author": "Iulian Radu",
-  "homepage_url": "https://github.com/iulian-radu-at/tl-which-query",
+  "homepage_url": "https://github.com/iulianraduat/tl-which-query",
   "content_scripts": [
     {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "tl-which-query.js"
-      ]
+      "matches": ["<all_urls>"],
+      "js": ["tl-which-query.js"]
     }
   ],
   "browser_specific_settings": {
     "gecko": {
-      "strict_min_version": "56.0a1",
+      "strict_min_version": "112.0",
       "id": "tl-which-query@iulian-radu.eu"
     }
   },
-  "permissions": [
-    "menus",
-    "activeTab",
-    "storage"
-  ],
+  "permissions": ["menus", "activeTab", "storage"],
   "background": {
-    "scripts": [
-      "background.js"
-    ],
+    "scripts": ["background.js"],
     "type": "classic"
   },
   "browser_action": {
